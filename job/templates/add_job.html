@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+  {% include 'recruiter_navigation.html' %}
+  <hr>
+
+<form name="signup" class="container mt-5" onsubmit="return checkpass();" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label>Job Tittle</label>
+            <input type="text" class="form-control" name="jobtitle" placeholder="Enter Job Title">
+        </div>
+    </div> 
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Start Date</label>
+            <input type="date" class="form-control" name="startdate">
+        </div>
+        <div class="form-group col-md-6">
+            <label>End Date</label>
+            <input type="date" class="form-control" name="enddate">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Salary</label>
+            <input type="text" class="form-control" name="salary">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Company Logo</label>
+            <input type="file" class="form-control" name="logo">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Experience(In Years)</label>
+            <input type="text" class="form-control" name="experience">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Company Location</label>
+            <input type="text" class="form-control" name="location">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Skills</label>
+            <input type="text"  class="form-control" name="skills">
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Description</label>
+            <textarea class="form-control" name="description"></textarea>
+        </div>
+    </div>
+        
+
+    <input type="submit" value="Submit" class="btn btn-primary my-3" style="width:200px">
+</form>
+<p>DEBUG: error = "{{ error }}"</p>
+
+{% if error == "no" %}
+<script>
+    alert("Job detail has been posted successfully");
+    window.location = "{% url 'job_list' %}";
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert("Facing issue. Try Again!!");
+</script>
+{% endif %}
+
+  {% include "footer.html" %}
+{% endblock %}

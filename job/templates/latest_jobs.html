@@ -1,0 +1,39 @@
+{% load static %}
+{% block body %}
+{% include 'recruiter_navigation.html' %}
+<style>
+tr{text-align:center}
+</style>
+<hr>
+<div class="container">
+<table class="table table-hover" id="example">
+  <thead>
+    <tr style="background-color: #000080; color : white">
+      <th>Sr.No</th>
+      <th>Company Name</th>
+      <th>Job Title</th>
+      <th>Location</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in data %}
+    <tr style="background-color: #DEB887">
+      <td>{{forloop.counter}}</td>
+      <td> {{i.recruiter.company}}</td>
+      <td>{{i.tittle}}</td>
+      <td> {{i.location}}</td>
+      <td>{{i.start_date}}</td>
+      <td>{{i.end_date}}</td>
+      <td><a href="{% url 'employee_login' %}" class="btn btn-success btn-sm" >Login to Apply</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<hr>
+</div>
+{% include "footer.html" %}
+{% endblock %}
